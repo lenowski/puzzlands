@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://lkqrioeawxwt"]
+
+[ext_resource type="PackedScene" uid="uid://dx6ei4sune4wk" path="res://scenes/component/BuildingComponent.tscn" id="1_4iy7f"]
+[ext_resource type="PackedScene" uid="uid://dtpg0bki55ck3" path="res://scenes/building/sprite/VillageSprite2D.tscn" id="2_4iy7f"]
+
+[node name="Village" type="Node2D"]
+y_sort_enabled = true
+
+[node name="BuildingComponent" parent="." instance=ExtResource("1_4iy7f")]
+buildingResourcePath = "uid://pu85uv1pp32y"
+
+[node name="VillageSprite2D" parent="." instance=ExtResource("2_4iy7f")]
+position = Vector2(32, 32)

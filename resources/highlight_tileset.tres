@@ -1,0 +1,13 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://c6bjt1okqh1jr"]
+
+[ext_resource type="Texture2D" uid="uid://c5sgsbj31wlvo" path="res://assets/tiles/highlight_tile.png" id="1_hbmpb"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uaj17"]
+texture = ExtResource("1_hbmpb")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+1:0/0 = 0
+
+[resource]
+tile_size = Vector2i(64, 64)
+sources/0 = SubResource("TileSetAtlasSource_uaj17")

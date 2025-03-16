@@ -1,0 +1,50 @@
+[gd_scene load_steps=10 format=4 uid="uid://c8l53ctd0bqlq"]
+
+[ext_resource type="Script" uid="uid://dcygup3ubaji4" path="res://scenes/Main.cs" id="1_elqb8"]
+[ext_resource type="TileSet" uid="uid://c8hj8qup7xwbi" path="res://resources/tiles.tres" id="2_0bbpv"]
+[ext_resource type="PackedScene" uid="uid://bdrmye7ndg67b" path="res://scenes/manager/GridManager.tscn" id="2_rarhs"]
+[ext_resource type="TileSet" uid="uid://c6bjt1okqh1jr" path="res://resources/highlight_tileset.tres" id="2_rvslj"]
+[ext_resource type="PackedScene" uid="uid://bb61c0aplr431" path="res://scenes/manager/BuildingManager.tscn" id="3_nxtc6"]
+[ext_resource type="PackedScene" uid="uid://byi6fj8smmnvd" path="res://scenes/building/Base.tscn" id="5_vcsgt"]
+[ext_resource type="PackedScene" uid="uid://chqijoicbkrr0" path="res://scenes/ui/GameUI.tscn" id="6_c01mt"]
+[ext_resource type="PackedScene" uid="uid://c5ramyrwwsjvq" path="res://scenes/GoldMine.tscn" id="7_q8u5g"]
+[ext_resource type="PackedScene" uid="uid://fh8uaaqjgkna" path="res://scenes/building/BuildingGhost.tscn" id="8_jlsqs"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_elqb8")
+
+[node name="BuildingManager" parent="." node_paths=PackedStringArray("gridManager", "gameUI", "ySortRoot") instance=ExtResource("3_nxtc6")]
+gridManager = NodePath("../GridManager")
+gameUI = NodePath("../GameUI")
+ySortRoot = NodePath("../YSortRoot")
+buildingGhostScene = ExtResource("8_jlsqs")
+
+[node name="GridManager" parent="." node_paths=PackedStringArray("highlightTilemapLayer", "baseTerrainTilemapLayer") instance=ExtResource("2_rarhs")]
+highlightTilemapLayer = NodePath("../HighlightTilemapLayer")
+baseTerrainTilemapLayer = NodePath("../YSortRoot/BaseTerrainTilemapLayer")
+
+[node name="YSortRoot" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="BaseTerrainTilemapLayer" type="TileMapLayer" parent="YSortRoot"]
+y_sort_enabled = true
+tile_map_data = PackedByteArray("AAACAAMAAAAFAAAAAAACAAQAAAAFAAEAAAACAAUAAAAFAAEAAAACAAYAAAAFAAEAAAACAAcAAAAFAAIAAAADAAcAAAAGAAIAAAAEAAcAAAAGAAIAAAAFAAgAAAAFAAIAAAAFAAcAAAAGAAEAAAAGAAgAAAAGAAIAAAAIAAcAAAAHAAIAAAAHAAgAAAAHAAIAAAAHAAcAAAAGAAEAAAAIAAYAAAAGAAEAAAAJAAYAAAAGAAIAAAAKAAYAAAAGAAIAAAALAAcAAAAFAAEAAAALAAgAAAAFAAIAAAALAAYAAAAGAAEAAAAMAAgAAAAGAAIAAAANAAgAAAAGAAIAAAAOAAgAAAAGAAIAAAAPAAgAAAAHAAIAAAAPAAcAAAAHAAEAAAAPAAYAAAAHAAAAAAAOAAYAAAAGAAEAAAAOAAUAAAAHAAEAAAAOAAQAAAAHAAEAAAAOAAMAAAAHAAEAAAAOAAIAAAAHAAAAAAANAAIAAAAGAAAAAAAMAAIAAAAGAAAAAAALAAIAAAAGAAEAAAALAAEAAAAHAAAAAAAKAAEAAAAGAAAAAAAJAAEAAAAGAAAAAAAIAAEAAAAGAAAAAAAHAAEAAAAFAAAAAAAIAAIAAAAGAAEAAAAHAAIAAAAGAAEAAAAGAAIAAAAGAAAAAAAFAAIAAAAGAAAAAAAEAAIAAAAFAAAAAAADAAMAAAAGAAAAAAAEAAMAAAAGAAEAAAADAAQAAAAGAAEAAAADAAUAAAAGAAEAAAADAAYAAAAGAAEAAAAEAAYAAAAGAAEAAAAFAAYAAAAGAAEAAAAGAAYAAAAGAAEAAAAHAAYAAAAGAAEAAAAGAAcAAAAGAAEAAAAEAAUAAAAGAAEAAAAFAAUAAAAGAAEAAAAGAAUAAAAGAAEAAAAHAAQAAAAGAAEAAAAIAAUAAAAGAAEAAAAKAAUAAAAGAAEAAAAJAAUAAAAGAAEAAAALAAUAAAAGAAEAAAAMAAUAAAAGAAEAAAANAAUAAAAGAAEAAAANAAYAAAAGAAEAAAAMAAYAAAAGAAEAAAAMAAcAAAAGAAEAAAANAAcAAAAGAAEAAAAOAAcAAAAGAAEAAAANAAQAAAAGAAEAAAANAAMAAAAGAAEAAAAMAAMAAAAGAAEAAAALAAMAAAAGAAEAAAAKAAMAAAAGAAEAAAAKAAIAAAAGAAEAAAAJAAIAAAAGAAEAAAAIAAMAAAAGAAEAAAAJAAMAAAAGAAEAAAAKAAQAAAAGAAEAAAALAAQAAAAGAAEAAAAMAAQAAAAGAAEAAAAJAAQAAAAGAAEAAAAIAAQAAAAGAAEAAAAHAAUAAAAGAAEAAAAHAAMAAAAGAAEAAAAGAAMAAAAGAAEAAAAFAAMAAAAGAAEAAAAEAAQAAAAGAAEAAAAFAAQAAAAGAAEAAAAGAAQAAAAGAAEAAAA=")
+tile_set = ExtResource("2_0bbpv")
+
+[node name="ResourceTilemapLayer" type="TileMapLayer" parent="YSortRoot/BaseTerrainTilemapLayer"]
+y_sort_enabled = true
+tile_map_data = PackedByteArray("AAAHAAEAAQAAAAAAAAAJAAEAAQAAAAAAAAAIAAIAAQAAAAAAAAAJAAMAAQAAAAAAAAAKAAMAAQAAAAAAAAAKAAIAAQAAAAAAAAALAAIAAQAAAAAAAAA=")
+tile_set = ExtResource("2_0bbpv")
+
+[node name="Base" parent="YSortRoot" instance=ExtResource("5_vcsgt")]
+position = Vector2(448, 320)
+
+[node name="GoldMine" parent="YSortRoot" instance=ExtResource("7_q8u5g")]
+unique_name_in_owner = true
+position = Vector2(896, 512)
+
+[node name="HighlightTilemapLayer" type="TileMapLayer" parent="."]
+modulate = Color(1, 1, 1, 0.494118)
+tile_set = ExtResource("2_rvslj")
+
+[node name="GameUI" parent="." instance=ExtResource("6_c01mt")]
