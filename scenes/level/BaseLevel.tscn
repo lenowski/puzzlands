@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://c8l53ctd0bqlq"]
+[gd_scene load_steps=11 format=3 uid="uid://c8l53ctd0bqlq"]
 
 [ext_resource type="Script" uid="uid://hwn51piafrqx" path="res://scenes/level/BaseLevel.cs" id="1_64vxc"]
 [ext_resource type="PackedScene" uid="uid://bb61c0aplr431" path="res://scenes/manager/BuildingManager.tscn" id="2_h5t2n"]
 [ext_resource type="PackedScene" uid="uid://fh8uaaqjgkna" path="res://scenes/building/BuildingGhost.tscn" id="3_bgxm0"]
 [ext_resource type="PackedScene" uid="uid://bdrmye7ndg67b" path="res://scenes/manager/GridManager.tscn" id="4_ablmx"]
 [ext_resource type="TileSet" uid="uid://c8hj8qup7xwbi" path="res://resources/tiles.tres" id="5_cqqo6"]
+[ext_resource type="PackedScene" uid="uid://sy36en25lxdh" path="res://scenes/GameCamera.tscn" id="5_fjnsi"]
 [ext_resource type="PackedScene" uid="uid://byi6fj8smmnvd" path="res://scenes/building/Base.tscn" id="6_yy46b"]
 [ext_resource type="PackedScene" uid="uid://c5ramyrwwsjvq" path="res://scenes/GoldMine.tscn" id="7_7c24a"]
 [ext_resource type="TileSet" uid="uid://c6bjt1okqh1jr" path="res://resources/highlight_tileset.tres" id="8_fr8k4"]
@@ -21,16 +22,19 @@ buildingGhostScene = ExtResource("3_bgxm0")
 
 [node name="GridManager" parent="." node_paths=PackedStringArray("highlightTilemapLayer", "baseTerrainTilemapLayer") instance=ExtResource("4_ablmx")]
 highlightTilemapLayer = NodePath("../HighlightTilemapLayer")
-baseTerrainTilemapLayer = NodePath("../YSortRoot/BaseTerrainTilemapLayer")
+baseTerrainTilemapLayer = NodePath("../YSortRoot/BaseTerrainTileMapLayer")
+
+[node name="GameCamera" parent="." instance=ExtResource("5_fjnsi")]
 
 [node name="YSortRoot" type="Node2D" parent="."]
 y_sort_enabled = true
 
-[node name="BaseTerrainTilemapLayer" type="TileMapLayer" parent="YSortRoot"]
+[node name="BaseTerrainTileMapLayer" type="TileMapLayer" parent="YSortRoot"]
+unique_name_in_owner = true
 y_sort_enabled = true
 tile_set = ExtResource("5_cqqo6")
 
-[node name="FoamTileMapLayer" type="TileMapLayer" parent="YSortRoot/BaseTerrainTilemapLayer"]
+[node name="FoamTileMapLayer" type="TileMapLayer" parent="YSortRoot/BaseTerrainTileMapLayer"]
 y_sort_enabled = true
 tile_set = ExtResource("5_cqqo6")
 
