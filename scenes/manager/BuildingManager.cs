@@ -140,7 +140,11 @@ public partial class BuildingManager : Node
             .GetNodesInGroup(nameof(BuildingComponent))
             .Cast<BuildingComponent>()
             .FirstOrDefault(
-                (buildingComponent) => buildingComponent.GetGridCellPosition() == rootCell
+                (buildingComponent) =>
+                {
+                    return buildingComponent.BuildingResource.IsDeletable
+                        && buildingComponent.GetGridCellPosition() == rootCell;
+                }
             );
         if (buildingComponent == null)
             return;
