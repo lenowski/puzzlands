@@ -143,7 +143,7 @@ public partial class BuildingManager : Node
                 (buildingComponent) =>
                 {
                     return buildingComponent.BuildingResource.IsDeletable
-                        && buildingComponent.GetGridCellPosition() == rootCell;
+                        && buildingComponent.IsTileInBuildingArea(rootCell);
                 }
             );
         if (buildingComponent == null)
