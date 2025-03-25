@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://c8l53ctd0bqlq"]
+[gd_scene load_steps=12 format=3 uid="uid://c8l53ctd0bqlq"]
 
 [ext_resource type="Script" uid="uid://hwn51piafrqx" path="res://scenes/level/BaseLevel.cs" id="1_64vxc"]
+[ext_resource type="PackedScene" uid="uid://bsip8crpfantj" path="res://scenes/ui/LevelCompleteScreen.tscn" id="2_53232"]
 [ext_resource type="PackedScene" uid="uid://bb61c0aplr431" path="res://scenes/manager/BuildingManager.tscn" id="2_h5t2n"]
 [ext_resource type="PackedScene" uid="uid://fh8uaaqjgkna" path="res://scenes/building/BuildingGhost.tscn" id="3_bgxm0"]
 [ext_resource type="PackedScene" uid="uid://bdrmye7ndg67b" path="res://scenes/manager/GridManager.tscn" id="4_ablmx"]
@@ -13,6 +14,7 @@
 
 [node name="BaseLevel" type="Node"]
 script = ExtResource("1_64vxc")
+levelCompleteScreenScene = ExtResource("2_53232")
 
 [node name="BuildingManager" parent="." node_paths=PackedStringArray("gridManager", "gameUI", "ySortRoot") instance=ExtResource("2_h5t2n")]
 gridManager = NodePath("../GridManager")
