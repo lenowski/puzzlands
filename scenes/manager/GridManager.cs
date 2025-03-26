@@ -21,6 +21,7 @@ public partial class GridManager : Node
     public delegate void GridStateUpdatedEventHandler();
 
     private HashSet<Vector2I> validBuildableTiles = new();
+    private HashSet<Vector2I> allTilesInBuildingRadius = new();
     private HashSet<Vector2I> collectedResourceTiles = new();
     private HashSet<Vector2I> occupiedTiles = new();
 
@@ -63,6 +64,11 @@ public partial class GridManager : Node
     public bool IsTilePositionBuildable(Vector2I tilePosition)
     {
         return validBuildableTiles.Contains(tilePosition);
+    }
+
+    public bool IsTilePositionInBuildingRadius(Vector2I tilePosition)
+    {
+        return allTilesInBuildingRadius.Contains(tilePosition);
     }
 
     public bool IsTileAreaBuildable(Rect2I tileArea)
@@ -180,13 +186,21 @@ public partial class GridManager : Node
     private void UpdateValidBuildableTiles(BuildingComponent buildingComponent)
     {
         occupiedTiles.UnionWith(buildingComponent.GetOccupiedCellPositions());
+
         var rootCell = buildingComponent.GetGridCellPosition();
         var tileArea = new Rect2I(rootCell, buildingComponent.BuildingResource.Dimensions);
         var validTiles = GetValidTilesInRadius(
             tileArea,
             buildingComponent.BuildingResource.BuildableRadius
         );
+        var allTiles = GetTilesInRadius(
+            tileArea,
+            buildingComponent.BuildingResource.BuildableRadius,
+            (_) => true
+        );
+
         validBuildableTiles.UnionWith(validTiles);
+        allTilesInBuildingRadius.UnionWith(allTiles);
         validBuildableTiles.ExceptWith(occupiedTiles);
         EmitSignal(SignalName.GridStateUpdated);
     }
@@ -214,6 +228,7 @@ public partial class GridManager : Node
     {
         occupiedTiles.Clear();
         validBuildableTiles.Clear();
+        allTilesInBuildingRadius.Clear();
         collectedResourceTiles.Clear();
 
         var buildingComponents = GetTree()
