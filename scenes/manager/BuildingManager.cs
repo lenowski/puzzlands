@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 using Game.Building;
 using Game.Component;
@@ -157,9 +156,8 @@ public partial class BuildingManager : Node
     private void DestroyBuildingAtHoveredCellPosition()
     {
         var rootCell = hoveredGridArea.Position;
-        var buildingComponent = GetTree()
-            .GetNodesInGroup(nameof(BuildingComponent))
-            .Cast<BuildingComponent>()
+        var buildingComponent = BuildingComponent
+            .GetValidBuildingComponents(this)
             .FirstOrDefault(
                 (buildingComponent) =>
                 {
@@ -168,7 +166,9 @@ public partial class BuildingManager : Node
                 }
             );
         if (buildingComponent == null)
+        {
             return;
+        }
 
         currentlyUsedResourceCount -= buildingComponent.BuildingResource.ResourceCost;
         buildingComponent.Destroy();
