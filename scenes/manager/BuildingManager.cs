@@ -191,6 +191,10 @@ public partial class BuildingManager : Node
         {
             return;
         }
+        if (!gridManager.CanDestroyBuilding(buildingComponent))
+        {
+            return;
+        }
 
         currentlyUsedResourceCount -= buildingComponent.BuildingResource.ResourceCost;
         buildingComponent.Destroy();
