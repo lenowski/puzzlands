@@ -50,6 +50,6 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 
 [node name="HighlightTilemapLayer" type="TileMapLayer" parent="YSortRoot"]
-modulate = Color(1, 1, 1, 0.494118)
+modulate = Color(1, 1, 1, 0.705882)
 y_sort_enabled = true
 tile_set = ExtResource("8_fr8k4")
