@@ -45,24 +45,6 @@ theme_override_constants/h_separation = 16
 theme_override_constants/v_separation = 16
 columns = 3
 
-[node name="LevelSelectSection" parent="HBoxContainer/PanelContainer/MarginContainer/GridContainer" instance=ExtResource("1_dtogu")]
-layout_mode = 2
-
-[node name="LevelSelectSection2" parent="HBoxContainer/PanelContainer/MarginContainer/GridContainer" instance=ExtResource("1_dtogu")]
-layout_mode = 2
-
-[node name="LevelSelectSection3" parent="HBoxContainer/PanelContainer/MarginContainer/GridContainer" instance=ExtResource("1_dtogu")]
-layout_mode = 2
-
-[node name="LevelSelectSection4" parent="HBoxContainer/PanelContainer/MarginContainer/GridContainer" instance=ExtResource("1_dtogu")]
-layout_mode = 2
-
-[node name="LevelSelectSection5" parent="HBoxContainer/PanelContainer/MarginContainer/GridContainer" instance=ExtResource("1_dtogu")]
-layout_mode = 2
-
-[node name="LevelSelectSection6" parent="HBoxContainer/PanelContainer/MarginContainer/GridContainer" instance=ExtResource("1_dtogu")]
-layout_mode = 2
-
 [node name="NextPageButton" type="Button" parent="HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2

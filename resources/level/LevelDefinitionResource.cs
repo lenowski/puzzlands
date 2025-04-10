@@ -6,7 +6,7 @@ namespace Game.Resources.Level;
 public partial class LevelDefinitionResource : Resource
 {
     [Export]
-    public string Id { set; private get; }
+    public string Id { get; private set; }
 
     [Export]
     public int StartingResourceCount { get; private set; } = 4;
