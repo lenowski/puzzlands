@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c8l53ctd0bqlq"]
+[gd_scene load_steps=14 format=3 uid="uid://c8l53ctd0bqlq"]
 
 [ext_resource type="Script" uid="uid://hwn51piafrqx" path="res://scenes/level/BaseLevel.cs" id="1_64vxc"]
 [ext_resource type="PackedScene" uid="uid://bsip8crpfantj" path="res://scenes/ui/LevelCompleteScreen.tscn" id="2_53232"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://c5ramyrwwsjvq" path="res://scenes/GoldMine.tscn" id="7_7c24a"]
 [ext_resource type="TileSet" uid="uid://c6bjt1okqh1jr" path="res://resources/highlight_tileset.tres" id="8_fr8k4"]
 [ext_resource type="PackedScene" uid="uid://chqijoicbkrr0" path="res://scenes/ui/GameUI.tscn" id="9_8yl83"]
+[ext_resource type="PackedScene" uid="uid://bmh2himiaerrx" path="res://scenes/manager/FloatingTextManager.tscn" id="13_8dj5a"]
 
 [node name="BaseLevel" type="Node"]
 script = ExtResource("1_64vxc")
@@ -57,3 +58,5 @@ tile_set = ExtResource("8_fr8k4")
 
 [node name="ResourceIndicatorManager" parent="." node_paths=PackedStringArray("gridManager") instance=ExtResource("6_uuy1i")]
 gridManager = NodePath("../GridManager")
+
+[node name="FloatingTextManager" parent="." instance=ExtResource("13_8dj5a")]

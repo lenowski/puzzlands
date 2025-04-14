@@ -73,11 +73,7 @@ public partial class BuildingManager : Node
                 {
                     ChangeState(State.Normal);
                 }
-                else if (
-                    toPlaceBuildingResource != null
-                    && evt.IsActionPressed(ACTION_LEFT_CLICK)
-                    && IsBuildingPlaceableAtArea(hoveredGridArea)
-                )
+                else if (toPlaceBuildingResource != null && evt.IsActionPressed(ACTION_LEFT_CLICK))
                 {
                     PlaceBuildingAtHoveredCellPosition();
                 }
@@ -163,6 +159,18 @@ public partial class BuildingManager : Node
 
     private void PlaceBuildingAtHoveredCellPosition()
     {
+        if (!CanAffordBuilding())
+        {
+            FloatingTextManager.ShowMassge("Can't afford!");
+            return;
+        }
+
+        if (!IsBuildingPlaceableAtArea(hoveredGridArea))
+        {
+            FloatingTextManager.ShowMassge("Invalid placement!");
+            return;
+        }
+
         var building = toPlaceBuildingResource.BuildingScene.Instantiate<Node2D>();
         ySortRoot.AddChild(building);
 
@@ -193,6 +201,7 @@ public partial class BuildingManager : Node
         }
         if (!gridManager.CanDestroyBuilding(buildingComponent))
         {
+            FloatingTextManager.ShowMassge("Cant destroy!");
             return;
         }
 
@@ -213,11 +222,16 @@ public partial class BuildingManager : Node
         buildingGhost = null;
     }
 
+    private bool CanAffordBuilding()
+    {
+        return AvailableResourceCount >= toPlaceBuildingResource.ResourceCost;
+    }
+
     private bool IsBuildingPlaceableAtArea(Rect2I tileArea)
     {
         var isAttackTiles = toPlaceBuildingResource.IsAttackBuilding();
         var allTilesBuildable = gridManager.IsTileAreaBuildable(tileArea, isAttackTiles);
-        return allTilesBuildable && AvailableResourceCount >= toPlaceBuildingResource.ResourceCost;
+        return allTilesBuildable && CanAffordBuilding();
     }
 
     private void UpdateHoveredGridArea()
