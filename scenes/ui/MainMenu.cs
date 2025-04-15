@@ -5,17 +5,22 @@ namespace Game.UI;
 
 public partial class MainMenu : Node
 {
+    [Export]
+    private PackedScene optionsMenuScene;
+
     private Button playButton;
     private Control mainMenuContainer;
     private LevelSelectScreen levelSelectScreen;
     private Button quitButton;
+    private Button optionsButton;
 
     public override void _Ready()
     {
         playButton = GetNode<Button>("%PlayButton");
         quitButton = GetNode<Button>("%QuitButton");
+        optionsButton = GetNode<Button>("%OptionsButton");
 
-        AudioHelpers.RegisteredButtons(new Button[] { playButton, quitButton });
+        AudioHelpers.RegisteredButtons(new Button[] { playButton, quitButton, optionsButton });
 
         mainMenuContainer = GetNode<Control>("%MainMenuContainer");
         levelSelectScreen = GetNode<LevelSelectScreen>("%LevelSelectScreen");
@@ -25,6 +30,7 @@ public partial class MainMenu : Node
 
         playButton.Pressed += OnPlayButtonPressed;
         quitButton.Pressed += OnQuitButtonPressed;
+        optionsButton.Pressed += OnOptionsButtonPressed;
         levelSelectScreen.BackPressed += OnLevelSelectBackPressed;
     }
 
@@ -43,5 +49,24 @@ public partial class MainMenu : Node
     private void OnQuitButtonPressed()
     {
         GetTree().Quit();
+    }
+
+    private void OnOptionsButtonPressed()
+    {
+        mainMenuContainer.Visible = false;
+        var optionsMenu = optionsMenuScene.Instantiate<OptionsMenu>();
+
+        AddChild(optionsMenu);
+
+        optionsMenu.DonePressed += () =>
+        {
+            OnOptionsDonePressed(optionsMenu);
+        };
+    }
+
+    private void OnOptionsDonePressed(OptionsMenu optionsMenu)
+    {
+        optionsMenu.QueueFree();
+        mainMenuContainer.Visible = true;
     }
 }
