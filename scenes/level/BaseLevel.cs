@@ -38,6 +38,10 @@ public partial class BaseLevel : Node
         gameCamera.SetBoudingRect(baseTerrainTileMapLayer.GetUsedRect());
         gameCamera.CenterOnPosition(baseBuilding.GlobalPosition);
 
+        gridManager.SetGoldMinePosition(
+            gridManager.ConvertWorldPositionToTilePosition(goldMine.GlobalPosition)
+        );
+
         gridManager.GridStateUpdated += OnGridStateUpdated;
     }
 
