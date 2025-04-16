@@ -8,8 +8,13 @@ namespace Game;
 
 public partial class BaseLevel : Node
 {
+    private readonly StringName ESCAPE_ACTION = "escape";
+
     [Export]
     private PackedScene levelCompleteScreenScene;
+
+    [Export]
+    private PackedScene escapeMenuScene;
 
     [Export]
     private LevelDefinitionResource levelDefinitionResource;
@@ -43,6 +48,16 @@ public partial class BaseLevel : Node
         );
 
         gridManager.GridStateUpdated += OnGridStateUpdated;
+    }
+
+    public override void _UnhandledInput(InputEvent evt)
+    {
+        if (evt.IsActionPressed(ESCAPE_ACTION))
+        {
+            var escapeMenu = escapeMenuScene.Instantiate<EscapeMenu>();
+            AddChild(escapeMenu);
+            GetViewport().SetInputAsHandled();
+        }
     }
 
     private void ShowLevelComplete()
